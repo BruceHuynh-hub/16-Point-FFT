@@ -1,0 +1,21 @@
+robocode@RobOCode-VirtualBox:~/Desktop/lab-2-Rob-O-Code$ cd software/transpose/ && make && cd ../.. && cd sim && make iver && ./a.out && cd ..
+msp430-elf-gcc -D PFX_MSP430_ELF -O2 -Wall -g -mcpu=msp430 -mhwmult=none   -c -o main.o main.c
+msp430-elf-gcc -D PFX_MSP430_ELF -O2 -Wall -g -mcpu=msp430 -mhwmult=none -T linker.msp430-elf.x -o app.elf main.o omsp_uart.o
+msp430-elf-objcopy -O ihex app.elf app.a43
+msp430-elf-objdump -dSt app.elf >app.lst
+msp430-elf-size  app.elf >app.size
+msp430-elf-objcopy -O ihex ../software/transpose/app.elf pmem.ihex
+./ihex2mem.tcl -ihex pmem.ihex -out pmem.mem -mem_size 8192
+iverilog -y ../rtl -y . -y ../rtl/periph -y ../software/transpose -I ../rtl -I ../rtl/periph -DSEED=1 topleveltb.v
+VCD info: dumpfile topleveltb.vcd opened for output.
+UART: >
+UART: ****************
+UART: ################
+UART: SCCC9F9E5A5C83E14
+UART: T0000000000021BA7
+UART: HCCC9F9E5A5C83E14
+UART: T000000000000B9F7
+UART: PASS
+UART: +
+end of simulation (    155659 instructions)
+
