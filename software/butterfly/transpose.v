@@ -1,4 +1,4 @@
-module FFT (
+module transpose(
 	output [15:0] per_dout,  // data output
 	input         mclk,      // system clock
 	input  [13:0] per_addr,  // address bus  
