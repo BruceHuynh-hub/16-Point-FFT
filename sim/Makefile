@@ -1,8 +1,9 @@
 # SYSDIR = ../software/sandbox
-# SYSDIR = ../software/uart
+SYSDIR = ../software/uart
 # SYSDIR = ../software/timer
 # SYSDIR = ../software/mmreg
-SYSDIR = ../software/transpose
+# SYSDIR = ../software/transpose
+# SYSDIR = ../software/butterfly
 
 TARGET = $(SYSDIR)/app.elf
 
