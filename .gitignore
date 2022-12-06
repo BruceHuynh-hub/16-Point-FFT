@@ -1,0 +1,17 @@
+# ignore all .vcd files
+*.vcd
+
+# ignore all .out files
+*.out
+*.o
+
+# ignore all files starting with _
+_*
+
+# ignore compilation artifacts
+*.a43
+*.elf
+*.lst
+*.size
+*.ihex
+*.mem
