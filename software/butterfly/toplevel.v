@@ -226,13 +226,14 @@ module toplevel (
 	   .uart_rxd     (user_uart_rx)   // UART Data Receive (RXD)
 	   );
    
+   /*
    FFT FFT0(.per_dout(per_dout_transpose),
 		.mclk(mclk),
 		.per_addr(per_addr),
 		.per_din(per_din),
 		.per_en(per_en),
 		.per_we(per_we),
-		.puc_rst(puc_rst));
+		.puc_rst(puc_rst));*/
    
    assign per_dout = per_dout_dio  |
                      per_dout_tA   |

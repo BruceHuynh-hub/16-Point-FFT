@@ -31,59 +31,32 @@ void prngseed() {
   s1 = 0x8090A0B0C0D0E0F0LL;
 }
 
-unsigned long long prng() {
+unsigned prng() {
     unsigned long long result = s0 + s1;
     s1 ^= s0;
     s0 = ((s0 << 55) | (s0 >> 9)) ^ s1 ^ (s1 << 14);
     s1 = (s1 << 36) | (s1 >> 28);
-    return result;
+    return (result | 0x7FFF);
 }
 
-unsigned long long transpose(unsigned long long a) {
-  unsigned r1, r2, r3, r4, r5, r6, r7, r8;
-  unsigned long long c, d;
-  unsigned i;
-
-  r1 = (a >> 56);
-  r2 = (a >> 48) & 0xff;
-  r3 = (a >> 40) & 0xff;
-  r4 = (a >> 32) & 0xff;
-  r5 = (a >> 24) & 0xff;
-  r6 = (a >> 16) & 0xff;
-  r7 = (a >>  8) & 0xff;
-  r8 = (a      ) & 0xff;
-
-  c = 0;
-  for (i = 0; i<8; i++) {
-    
-    d = ((r1 & 1) << 7)
-      | ((r2 & 1) << 6)
-      | ((r3 & 1) << 5)
-      | ((r4 & 1) << 4)
-      | ((r5 & 1) << 3)
-      | ((r6 & 1) << 2)
-      | ((r7 & 1) << 1)
-      | ((r8 & 1));
-      
-    c = (d << 56) + (c >> 8);
-
-    r1 = r1 >> 1;
-    r2 = r2 >> 1;
-    r3 = r3 >> 1;
-    r4 = r4 >> 1;
-    r5 = r5 >> 1;
-    r6 = r6 >> 1;
-    r7 = r7 >> 1;
-    r8 = r8 >> 1;
-
+void shiftFFT(signed in) {
+  static signed a[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  static signed out[16];
+  signed i;
+  
+  for (i = 15; i > 0; i--) {
+  	a[i] = a[i-1];
   }
-
-  return c;
+  a[0] = in;
+  
+  for (i = 0; i < 16; i++) {
+  	out[i] = a[i];
+  }
 }
 
 unsigned long long hwtranspose(unsigned long long a) {
-	unsigned long long b;
-	FFT_REG1 = (a >> 48) & 0xffff;
+	unsigned long long b = 0;
+	/*FFT_REG1 = (a >> 48) & 0xffff;
 	FFT_REG2 = (a >> 32) & 0xffff;
 	FFT_REG3 = (a >> 16) & 0xffff;
 	FFT_REG4 = a & 0xffff;
@@ -91,16 +64,17 @@ unsigned long long hwtranspose(unsigned long long a) {
 	b = FFT_REG4;
 	b |= ((unsigned long long) FFT_REG3 << 16);
 	b |= ((unsigned long long) FFT_REG2 << 32);
-	b |= ((unsigned long long) FFT_REG1 << 48);
+	b |= ((unsigned long long) FFT_REG1 << 48);*/
   return b;
 }
   
 int main(void) {
   unsigned i;
   unsigned long long sw_time;
-  unsigned long long hw_time;
+  unsigned long long hw_time = 0;
   unsigned long long sw_check;
-  unsigned long long hw_check;
+  unsigned long long hw_check = 0;
+  signed fft[16];
   
   WDTCTL = WDTPW | WDTHOLD;  // Disable watchdog timer
   TACTL  |= (TASSEL1 | MC1 | TACLR); // Configure timer
@@ -115,21 +89,23 @@ int main(void) {
   sw_time = 0;
   for (i=0; i<16; i++) {
     TimerLap();
-    sw_check += transpose(prng());
+    //sw_check += transpose(prng());
+    sw_check++;
+    shiftFFT(prng());
     sw_time += TimerLap();
     putchar('*');
   }
   
-	putchar('\n');
-  prngseed();
-  hw_check = 0;
-  hw_time  = 0;
-  for (i=0; i<16; i++) {
-    TimerLap();
-    hw_check += hwtranspose(prng());
-    hw_time += TimerLap();
-    putchar('#');
-  }
+	//putchar('\n');
+  //prngseed();
+  //hw_check = 0;
+  //hw_time  = 0;
+  //for (i=0; i<16; i++) {
+  //  TimerLap();
+  //  hw_check += hwtranspose(prng());
+  //  hw_time += TimerLap();
+  //  putchar('#');
+  //}
 	
 	putchar('\n');
   putchar('S');
