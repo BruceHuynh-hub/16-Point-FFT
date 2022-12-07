@@ -7,11 +7,6 @@ module butterfly (
 
 	// define parameters for twiddle factor here
 
-	reg [15:0]
-
-	always @(*) begin
-
-	end
 
 	assign out1r = Ar + Br + Cr + Dr;
 	assign out1i = Ai + Bi + Ci + Di;
