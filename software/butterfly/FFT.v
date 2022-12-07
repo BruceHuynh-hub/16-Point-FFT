@@ -1,40 +1,49 @@
 module FFT (
-	output [15:0] per_dout,  // data output
-	input         mclk,      // system clock
+
 	input  [13:0] per_addr,  // address bus  
-	input  [15:0] per_din,   // data input
+	input signed [15:0] din0r, din1r, din2r, din3r,   // data input
+	input signed [15:0] din0i, din1i, din2i, din3i,
+	input         mclk,      // system clock
 	input         per_en,    // active bus cycle enable
 	input [1:0]   per_we,    // write control
 	input         puc_rst    // power-up clear reset
+	output [15:0] per_dout,  // data output
 	);
 
 
-	reg [15:0] 		    r1;          // mapped to 0x110
-	reg [15:0] 		    r1_next;     
-	reg [15:0] 		    r2;          // mapped to 0x112
-	reg [15:0] 		    r2_next;
-	reg [15:0] 		    r3;          // mapped to 0x114
-	reg [15:0] 		    r3_next;
-	reg [15:0] 		    r4;          // mapped to 0x116
-	reg [15:0] 		    r4_next;
 	reg [15:0] 		    dmux;
 	
-	wire [15:0] t1, t2, t3, t4;
+	reg [15:0] din0r_n, din1r_n, din2r_n, din3r_n;
+	reg [15:0] din0i_n, din1i_n, din2i_n, din3i_n,
+
 
 	// Perform next-state logic with clock and reset line
 	always @(posedge mclk or posedge puc_rst)
 		begin
 			if (puc_rst)
 				begin
-					r1 <= 16'b0;
-					r2 <= 16'b0;
-					r3 <= 16'b0;
-					r4 <= 16'b0;
+					
+					din0r_n <= 15'b0;
+					din1r_n <= 15'b0;
+					din2r_n <= 15'b0;
+					din3r_n <= 15'b0;
+
+					din0i_n <= 15'b0;
+					din1i_n <= 15'b0;
+					din2i_n <= 15'b0;
+					din3i_n <= 15'b0;
+
+
 				end else begin
-					r1 <= r1_next;
-					r2 <= r2_next;
-					r3 <= r3_next;
-					r4 <= r4_next;
+					din0r_n <= din0r;
+					din1r_n <= din1r;
+					din2r_n <= din2r;
+					din3r_n <= din3r;
+
+					din0i_n <= din0i;
+					din1i_n <= din1i;
+					din2i_n <= din2i;
+					din3i_n <= din3i;
 				end
 		end
 	
