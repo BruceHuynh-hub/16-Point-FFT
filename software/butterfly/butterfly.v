@@ -1,8 +1,8 @@
 module butterfly (
-	input signed [15:0] Ar, Br, Cr, Dr,
-	input signed [15:0] Ai, Bi, Ci, Di,
-	output signed[15:0] out1r, out2r, out3r, out4r,
-	output signed[15:0] out1i, out2i, out3i, out4i
+	input signed  [15:0] Ar, Br, Cr, Dr,
+	input signed  [15:0] Ai, Bi, Ci, Di,
+	output signed [15:0] out1r, out2r, out3r, out4r,
+	output signed [15:0] out1i, out2i, out3i, out4i
 );
 
 	// define parameters for twiddle factor here
