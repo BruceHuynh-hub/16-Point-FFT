@@ -237,8 +237,8 @@ module toplevel (
    
    assign per_dout = per_dout_dio  |
                      per_dout_tA   |
-		     per_dout_uart |
-		     per_dout_transpose;
+		     per_dout_uart; //|
+		     //per_dout_transpose;
    
    assign nmi        =  1'b0;
    assign irq_bus    = {1'b0,         // Vector 13  (0xFFFA)

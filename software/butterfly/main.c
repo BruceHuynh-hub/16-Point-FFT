@@ -39,18 +39,33 @@ unsigned prng() {
     return (result | 0x7FFF);
 }
 
-void shiftFFT(signed in) {
+void shiftFFT(signed in, signed out_re[], signed out_im[]) {
   static signed a[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
-  static signed out[16];
-  signed i;
+  signed b_re[16], b_im[16];
+  register signed i;
   
+  // Shift the FIFO
   for (i = 15; i > 0; i--) {
   	a[i] = a[i-1];
   }
   a[0] = in;
   
+  // Compute 4 butterfly units
+  for (i = 0; i < 4; i++) {
+  	b_re[i+0] = a[i+0] + a[i+4] + a[i+8] + a[i+12];
+  	b_re[i+1] = a[i+0]          - a[i+8];
+  	b_re[i+2] = a[i+0] - a[i+4] + a[i+8] - a[i+12];
+  	b_re[i+3] = a[i+0]          - a[i+8];
+  	b_im[i+0] = 0;
+  	b_im[i+1] =        - a[i+4]          + a[i+12];
+  	b_im[i+2] = 0;
+  	b_im[i+3] =          a[i+4]          - a[i+12];
+  	
+  }
+  
   for (i = 0; i < 16; i++) {
-  	out[i] = a[i];
+  	out_re[i] = b_re[i];
+  	out_im[i] = b_im[i];
   }
 }
 
@@ -74,7 +89,8 @@ int main(void) {
   unsigned long long hw_time = 0;
   unsigned long long sw_check;
   unsigned long long hw_check = 0;
-  signed fft[16];
+  signed fft_re[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  signed fft_im[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
   
   WDTCTL = WDTPW | WDTHOLD;  // Disable watchdog timer
   TACTL  |= (TASSEL1 | MC1 | TACLR); // Configure timer
@@ -87,11 +103,11 @@ int main(void) {
   prngseed();
   sw_check = 0;
   sw_time = 0;
-  for (i=0; i<16; i++) {
+  for (i=0; i<4; i++) {
     TimerLap();
     //sw_check += transpose(prng());
-    sw_check++;
-    shiftFFT(prng());
+    shiftFFT(i, fft_re, fft_im);
+    sw_check += fft_re[0];
     sw_time += TimerLap();
     putchar('*');
   }
