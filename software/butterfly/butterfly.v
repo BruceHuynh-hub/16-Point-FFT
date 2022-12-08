@@ -7,7 +7,16 @@ module butterfly (
 
 	// define parameters for twiddle factor here
 
+	parameter [15:0] W0r = ;
+	parameter [15:0] W0i = ;
+	parameter [15:0] W1r = ;
+	parameter [15:0] W1i = ;
+	parameter [15:0] W2r = ;
+	parameter [15:0] W2i = ;
+	parameter [15:0] W3r = ;
+	parameter [15:0] W3i = ;
 
+	/*
 	assign out1r = Ar + Br + Cr + Dr;
 	assign out1i = Ai + Bi + Ci + Di;
 
@@ -20,7 +29,7 @@ module butterfly (
 	assign out4r = Ar - Bi - Cr + Di;
 	assign out4i = Ai + Br - Ci - Dr;
 
-
+	*/
 
 
 endmodule 

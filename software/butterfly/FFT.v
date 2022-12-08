@@ -18,8 +18,8 @@ module FFT (
 	input         mclk,      // system clock
 	input         per_en,    // active bus cycle enable
 	input [1:0]   per_we,    // write control
-	input         puc_rst    // power-up clear reset
-	output [15:0] per_dout,  // data output
+	input         puc_rst,    // power-up clear reset
+	output [15:0] per_dout  // data output
 	);
 
 
@@ -44,42 +44,42 @@ module FFT (
 	// butterfly outputs
 
 	reg signed [15:0] but0_Ar, but0_Br, but0_Cr, but0_Dr;
-	reg signed [15:0] but0_Ai, but0_Bi, but0_Ci, but0_Di,
+	reg signed [15:0] but0_Ai, but0_Bi, but0_Ci, but0_Di;
 
 	reg signed [15:0] but1_Ar, but1_Br, but1_Cr, but1_Dr;
-	reg signed [15:0] but1_Ai, but1_Bi, but1_Ci, but1_Di,
+	reg signed [15:0] but1_Ai, but1_Bi, but1_Ci, but1_Di;
 
 	reg signed [15:0] but2_Ar, but2_Br, but2_Cr, but2_Dr;
-	reg signed [15:0] but2_Ai, but2_Bi, but2_Ci, but2_Di,
+	reg signed [15:0] but2_Ai, but2_Bi, but2_Ci, but2_Di;
 
 	reg signed [15:0] but3_Ar, but3_Br, but3_Cr, but3_Dr;
-	reg signed [15:0] but3_Ai, but3_Bi, but3_Ci, but3_Di,
+	reg signed [15:0] but3_Ai, but3_Bi, but3_Ci, but3_Di;
 
 	reg signed [15:0] but0_Ar_n, but0_Br_n, but0_Cr_n, but0_Dr_n;
-	reg signed [15:0] but0_Ai_n, but0_Bi_n, but0_Ci_n, but0_Di_n,
+	reg signed [15:0] but0_Ai_n, but0_Bi_n, but0_Ci_n, but0_Di_n;
 
 	reg signed [15:0] but1_Ar_n, but1_Br_n, but1_Cr_n, but1_Dr_n;
-	reg signed [15:0] but1_Ai_n, but1_Bi_n, but1_Ci_n, but1_Di_n,
+	reg signed [15:0] but1_Ai_n, but1_Bi_n, but1_Ci_n, but1_Di_n;
 
 	reg signed [15:0] but2_Ar_n, but2_Br_n, but2_Cr_n, but2_Dr_n;
-	reg signed [15:0] but2_Ai_n, but2_Bi_n, but2_Ci_n, but2_Di_n,
+	reg signed [15:0] but2_Ai_n, but2_Bi_n, but2_Ci_n, but2_Di_n;
 
 	reg signed [15:0] but3_Ar_n, but3_Br_n, but3_Cr_n, but3_Dr_n;
-	reg signed [15:0] but3_Ai_n, but3_Bi_n, but3_Ci_n, but3_Di_n,
+	reg signed [15:0] but3_Ai_n, but3_Bi_n, but3_Ci_n, but3_Di_n;
 
 
 	// butterfly units
 
-	butterfly but0 (.Ar(din0_Ar), .Ai(din0_Ai), .Br(din0_Br), .Bi(din0_Bi), .Cr(din0_Cr), .Ci(din0_Ci), Dr(din0_Dr), Di(din0_Di),
+	butterfly but0 (.Ar(din0_Ar), .Ai(din0_Ai), .Br(din0_Br), .Bi(din0_Bi), .Cr(din0_Cr), .Ci(din0_Ci), .Dr(din0_Dr), .Di(din0_Di),
 	.out0r(but0_Ar), .out0i(but0_Ai), .out1r(but0_Br), .out1i(but0_Bi), .out2r(but0_Cr), .out2i(but0_Ci), .out3r(but0_Dr), .out3i(but0_Di));
 
-	butterfly but1 (.Ar(din1_Ar), .Ai(din1_Ai), .Br(din1_Br), .Bi(din1_Bi), .Cr(din1_Cr), .Ci(din1_Ci), Dr(din1_Dr), Di(din1_Di),
+	butterfly but1 (.Ar(din1_Ar), .Ai(din1_Ai), .Br(din1_Br), .Bi(din1_Bi), .Cr(din1_Cr), .Ci(din1_Ci), .Dr(din1_Dr), .Di(din1_Di),
 	.out0r(but1_Ar), .out0i(but1_Ai), .out1r(but1_Br), .out1i(but1_Bi), .out2r(but1_Cr), .out2i(but1_Ci), .out3r(but1_Dr), .out3i(but1_Di));
 
-    butterfly but2 (.Ar(din2_Ar), .Ai(din2_Ai), .Br(din2_Br), .Bi(din2_Bi), .Cr(din2_Cr), .Ci(din2_Ci), Dr(din2_Dr), Di(din2_Di),
+    butterfly but2 (.Ar(din2_Ar), .Ai(din2_Ai), .Br(din2_Br), .Bi(din2_Bi), .Cr(din2_Cr), .Ci(din2_Ci), .Dr(din2_Dr), .Di(din2_Di),
 	.out0r(but2_Ar), .out0i(but2_Ai), .out1r(but2_Br), .out1i(but2_Bi), .out2r(but2_Cr), .out2i(but2_Ci), .out3r(but2_Dr), .out3i(but2_Di));
 
-	butterfly but3 (.Ar(din3_Ar), .Ai(din3_Ai), .Br(din3_Br), .Bi(din3_Bi), .Cr(din3_Cr), .Ci(din3_Ci), Dr(din3_Dr), Di(din3_Di),
+	butterfly but3 (.Ar(din3_Ar), .Ai(din3_Ai), .Br(din3_Br), .Bi(din3_Bi), .Cr(din3_Cr), .Ci(din3_Ci), .Dr(din3_Dr), .Di(din3_Di),
 	.out0r(but3_Ar), .out0i(but3_Ai), .out1r(but3_Br), .out1i(but3_Bi), .out2r(but3_Cr), .out2i(but3_Ci), .out3r(but3_Dr), .out3i(but3_Di));
 
 
