@@ -25,6 +25,8 @@ module FFT (
 
 	reg [15:0] 		    dmux;
 	
+	/*
+
 	reg [15:0] din0_Ar_n, din0_Br_n, din0_Cr_n, din0_Dr_n;
 	reg [15:0] din0_Ai_n, din0_Bi_n, din0_Ci_n, din0_Di_n,
 
@@ -37,32 +39,33 @@ module FFT (
 	reg [15:0] din3_Ar_n, din3_Br_n, din3_Cr_n, din3_Dr_n;
 	reg [15:0] din3_Ai_n, din3_Bi_n, din3_Ci_n, din3_Di_n,
 
+ */
 
 	// butterfly outputs
 
-	reg [15:0] but0_Ar, but0_Br, but0_Cr, but0_Dr;
-	reg [15:0] but0_Ai, but0_Bi, but0_Ci, but0_Di,
+	reg signed [15:0] but0_Ar, but0_Br, but0_Cr, but0_Dr;
+	reg signed [15:0] but0_Ai, but0_Bi, but0_Ci, but0_Di,
 
-	reg [15:0] but1_Ar, but1_Br, but1_Cr, but1_Dr;
-	reg [15:0] but1_Ai, but1_Bi, but1_Ci, but1_Di,
+	reg signed [15:0] but1_Ar, but1_Br, but1_Cr, but1_Dr;
+	reg signed [15:0] but1_Ai, but1_Bi, but1_Ci, but1_Di,
 
-	reg [15:0] but2_Ar, but2_Br, but2_Cr, but2_Dr;
-	reg [15:0] but2_Ai, but2_Bi, but2_Ci, but2_Di,
+	reg signed [15:0] but2_Ar, but2_Br, but2_Cr, but2_Dr;
+	reg signed [15:0] but2_Ai, but2_Bi, but2_Ci, but2_Di,
 
-	reg [15:0] but3_Ar, but3_Br, but3_Cr, but3_Dr;
-	reg [15:0] but3_Ai, but3_Bi, but3_Ci, but3_Di,
+	reg signed [15:0] but3_Ar, but3_Br, but3_Cr, but3_Dr;
+	reg signed [15:0] but3_Ai, but3_Bi, but3_Ci, but3_Di,
 
-	reg [15:0] but0_Ar_n, but0_Br_n, but0_Cr_n, but0_Dr_n;
-	reg [15:0] but0_Ai_n, but0_Bi_n, but0_Ci_n, but0_Di_n,
+	reg signed [15:0] but0_Ar_n, but0_Br_n, but0_Cr_n, but0_Dr_n;
+	reg signed [15:0] but0_Ai_n, but0_Bi_n, but0_Ci_n, but0_Di_n,
 
-	reg [15:0] but1_Ar_n, but1_Br_n, but1_Cr_n, but1_Dr_n;
-	reg [15:0] but1_Ai_n, but1_Bi_n, but1_Ci_n, but1_Di_n,
+	reg signed [15:0] but1_Ar_n, but1_Br_n, but1_Cr_n, but1_Dr_n;
+	reg signed [15:0] but1_Ai_n, but1_Bi_n, but1_Ci_n, but1_Di_n,
 
-	reg [15:0] but2_Ar_n, but2_Br_n, but2_Cr_n, but2_Dr_n;
-	reg [15:0] but2_Ai_n, but2_Bi_n, but2_Ci_n, but2_Di_n,
+	reg signed [15:0] but2_Ar_n, but2_Br_n, but2_Cr_n, but2_Dr_n;
+	reg signed [15:0] but2_Ai_n, but2_Bi_n, but2_Ci_n, but2_Di_n,
 
-	reg [15:0] but3_Ar_n, but3_Br_n, but3_Cr_n, but3_Dr_n;
-	reg [15:0] but3_Ai_n, but3_Bi_n, but3_Ci_n, but3_Di_n,
+	reg signed [15:0] but3_Ar_n, but3_Br_n, but3_Cr_n, but3_Dr_n;
+	reg signed [15:0] but3_Ai_n, but3_Bi_n, but3_Ci_n, but3_Di_n,
 
 
 	// butterfly units
@@ -85,7 +88,7 @@ module FFT (
 		begin
 			if (puc_rst)
 				begin
-					
+					/*
 					din0_Ar_n <= 16'b0; 
 					din0_Br_n <= 16'b0;
 					din0_Cr_n <= 16'b0;
@@ -120,7 +123,7 @@ module FFT (
 					din3_Bi_n <= 16'b0;
 					din3_Ci_n <= 16'b0;
 					din3_Di_n <= 16'b0;
-
+					*/
 					but0_Ar   <= 16'b0;
 					but0_Br   <= 16'b0;
 					but0_Cr   <= 16'b0;
@@ -280,7 +283,7 @@ module FFT (
 					// Take data from the per_din bus and write it to an internal register
 					case (per_addr)
 						14'h88 : begin
-							
+
 						end
 						14'h89 : begin end
 						14'h8a : begin end

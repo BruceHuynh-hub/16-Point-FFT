@@ -12,9 +12,9 @@ module butterfly2 (
 	input signed  [15:0] din3_Ai, din3_Bi, din3_Ci, din3_Di,
 
 	output signed [15:0] out0r, out1r, out2r, out3r,
-	output signed [15:0] out0i, out1i, out2i, out3i
-);
 
+);
+ 
 	// define parameters for twiddle factor here
 
 
