@@ -57,11 +57,11 @@ unsigned long long hwtranspose(unsigned long long a) {
 int main(void) {
   unsigned i;
   unsigned long long sw_time;
-  unsigned long long hw_time = 0;
+  //unsigned long long hw_time = 0;
   unsigned long long sw_check;
   unsigned long long hw_check = 0;
-  signed fft_re[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
-  signed fft_im[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  signed short fft_re[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  signed short fft_im[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
   
   WDTCTL = WDTPW | WDTHOLD;  // Disable watchdog timer
   TACTL  |= (TASSEL1 | MC1 | TACLR); // Configure timer
@@ -74,13 +74,23 @@ int main(void) {
   prngseed();
   sw_check = 0;
   sw_time = 0;
-  for (i=0; i<4; i++) {
+  for (i=0; i<16; i++) {
     TimerLap();
     //sw_check += transpose(prng());
-    shiftFFT(i, fft_re, fft_im);
+    shiftFFT((16-i)*10, fft_re, fft_im);
     sw_check += fft_re[0];
     sw_time += TimerLap();
     putchar('*');
+  }
+  
+  putchar('\n');
+  for (i=0; i<16; i++) {
+    putchar('r'); putchar(c16[i]); putchar('=');
+    puthex(fft_re[i]);
+    putchar(' ');
+    putchar('i'); putchar(c16[i]); putchar('=');
+    puthex(fft_im[i]);
+    putchar('\n');
   }
   
 	//putchar('\n');
@@ -94,6 +104,7 @@ int main(void) {
   //  putchar('#');
   //}
 	
+	/*
 	putchar('\n');
   putchar('S');
   puthex(sw_check >> 48);
@@ -107,6 +118,7 @@ int main(void) {
   puthex(sw_time  >> 16);
   puthex(sw_time       );
   putchar('\n');
+  *//*
   putchar('H');
   puthex(hw_check >> 48);
   puthex(hw_check >> 32);
@@ -119,6 +131,7 @@ int main(void) {
   puthex(hw_time  >> 16);
   puthex(hw_time       );
 	putchar('\n');
+	*/
 	
 	if (sw_check == hw_check) {
 		putchar('P');
