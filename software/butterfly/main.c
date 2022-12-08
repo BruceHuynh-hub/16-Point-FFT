@@ -1,6 +1,7 @@
 #include "omsp_system.h"
 #include "omsp_uart.h"
 #include "butterfly_fft.h"
+#include "shiftFFT.h"
 
 char c16[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
@@ -37,36 +38,6 @@ unsigned prng() {
     s0 = ((s0 << 55) | (s0 >> 9)) ^ s1 ^ (s1 << 14);
     s1 = (s1 << 36) | (s1 >> 28);
     return (result | 0x7FFF);
-}
-
-void shiftFFT(signed in, signed out_re[], signed out_im[]) {
-  static signed a[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
-  signed b_re[16], b_im[16];
-  register signed i;
-  
-  // Shift the FIFO
-  for (i = 15; i > 0; i--) {
-  	a[i] = a[i-1];
-  }
-  a[0] = in;
-  
-  // Compute 4 butterfly units
-  for (i = 0; i < 4; i++) {
-  	b_re[i+0] = a[i+0] + a[i+4] + a[i+8] + a[i+12];
-  	b_re[i+1] = a[i+0]          - a[i+8];
-  	b_re[i+2] = a[i+0] - a[i+4] + a[i+8] - a[i+12];
-  	b_re[i+3] = a[i+0]          - a[i+8];
-  	b_im[i+0] = 0;
-  	b_im[i+1] =        - a[i+4]          + a[i+12];
-  	b_im[i+2] = 0;
-  	b_im[i+3] =          a[i+4]          - a[i+12];
-  	
-  }
-  
-  for (i = 0; i < 16; i++) {
-  	out_re[i] = b_re[i];
-  	out_im[i] = b_im[i];
-  }
 }
 
 unsigned long long hwtranspose(unsigned long long a) {

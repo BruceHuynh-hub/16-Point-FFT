@@ -1,6 +1,6 @@
 # makfile configuration
 NAME            = app
-OBJECTS         = main.o omsp_uart.o
+OBJECTS         = main.o omsp_uart.o shiftFFT.o
 
 MSPGCC_PFX      = msp430-elf
 
