@@ -1,4 +1,16 @@
 >> MATLAB.printW
+N: 0 || real(W) =  32768, imag(W) =      0
+N: 1 || real(W) =  30274, imag(W) = -12540
+N: 2 || real(W) =  23170, imag(W) = -23170
+N: 3 || real(W) =  12540, imag(W) = -30274
+N: 4 || real(W) =      0, imag(W) = -32768
+N: 5 || real(W) = -12540, imag(W) = -30274
+N: 6 || real(W) = -23170, imag(W) = -23170
+N: 7 || real(W) = -30274, imag(W) = -12540
+N: 8 || real(W) = -32768, imag(W) =      0
+N: 9 || real(W) = -30274, imag(W) =  12540
+
+>> MATLAB.printW
 N: 0 || real(W) = 1000000000000000, imag(W) = 0000000000000000
 N: 1 || real(W) = 0111011001000001, imag(W) = 1100111100000100
 N: 2 || real(W) = 0101101010000010, imag(W) = 1010010101111110
