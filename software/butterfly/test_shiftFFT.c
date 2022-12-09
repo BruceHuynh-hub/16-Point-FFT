@@ -88,7 +88,7 @@ int main() {
 	
 	int i = 0;
 	for (i = 0; i < 16; i++) {
-		shiftFFT((16-i)*10, fft_re, fft_im);
+		shiftFFT((16-i)*(16-i)*10, fft_re, fft_im);
 	}
 	
 	for (i = 0; i < 16; i++) {

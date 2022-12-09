@@ -70,6 +70,33 @@ int main(void) {
 
   putchar('>');
   putchar('\n');
+  
+  signed short a[16], b_re[16], b_im[16], c_re[16], out_re;
+  for (i=0; i<16; i++) {
+    a[i] = (i+1)*(i+1)*10;
+  }
+  
+  b_re[1] =   a[0] - a[8];
+  b_im[1] = - a[4] + a[12];
+  b_re[5] =   a[1] - a[9];
+  b_im[5] = - a[5] + a[13];
+  b_re[9] =   a[2] - a[10];
+  b_im[9] = - a[6] + a[14];
+  b_re[13] =   a[3] - a[11];
+  b_im[13] = - a[8] + a[15];
+  const signed short W1_re =  30274;
+  const signed short W1_im = -12540;
+  const signed short W2_re =  23170;
+  const signed short W2_im = -23170;
+  const signed short W3_re =  12540;
+  const signed short W3_im = -30274;
+  c_re[ 1] = b_re[ 1];
+  c_re[ 5] = (W1_re * b_re[ 5] - W1_im * b_im[ 5]) >> 15;
+  c_re[ 9] = (W2_re * b_re[ 9] - W2_im * b_im[ 9]) >> 15;
+  c_re[13] = (W3_re * b_re[13] - W3_im * b_im[13]) >> 15;
+  out_re  = c_re[1] + c_re[5] + c_re[9] + c_re[13];
+  puthex(out_re);
+  putchar('\n');
 
   prngseed();
   sw_check = 0;
@@ -77,7 +104,7 @@ int main(void) {
   for (i=0; i<16; i++) {
     TimerLap();
     //sw_check += transpose(prng());
-    shiftFFT((16-i)*10, fft_re, fft_im);
+    shiftFFT((16-i)*(16-i)*10, fft_re, fft_im);
     sw_check += fft_re[0];
     sw_time += TimerLap();
     putchar('*');
