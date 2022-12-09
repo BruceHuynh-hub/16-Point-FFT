@@ -1,4 +1,4 @@
-#include "shiftFFT.h"
+#include <stdio.h>
 
 void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
   static signed short a[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
@@ -78,4 +78,22 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
   	out_re[i+12] = c_re[i+0] - c_im[i+4] - c_re[i+8] + c_im[i+12];
   	out_im[i+12] = c_im[i+0] + c_re[i+4] - c_im[i+8] - c_re[i+12];
   }
+}
+
+int main() {
+	signed short fft_re[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  signed short fft_im[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
+  
+	printf("\n--- Test shiftFFT ---\n\n");
+	
+	int i = 0;
+	for (i = 0; i < 16; i++) {
+		shiftFFT((16-i)*10, fft_re, fft_im);
+	}
+	
+	for (i = 0; i < 16; i++) {
+		printf("%2d: re = %6d, im = %6d\n", i, fft_re[i], fft_im[i]);
+	}
+	
+	return 0;
 }
