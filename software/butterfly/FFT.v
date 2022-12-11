@@ -22,7 +22,6 @@ module FFT (
 	output [15:0] per_dout  // data output
 	);
 
-
 	reg [15:0] 		    dmux;
 	
 	/*

@@ -7,29 +7,25 @@ module butterfly (
 
 	// define parameters for twiddle factor here
 
-	parameter [15:0] W0r = ;
-	parameter [15:0] W0i = ;
-	parameter [15:0] W1r = ;
-	parameter [15:0] W1i = ;
-	parameter [15:0] W2r = ;
-	parameter [15:0] W2i = ;
-	parameter [15:0] W3r = ;
-	parameter [15:0] W3i = ;
-
-	/*
-	assign out1r = Ar + Br + Cr + Dr;
-	assign out1i = Ai + Bi + Ci + Di;
-
-	assign out2r = Ar + Bi - Cr - Di;
-	assign out2i = Ai - Br - Ci + Dr;
-
-	assign out3r = Ar - Br + Cr - Dr;
-	assign out3i = Ai - Bi + Ci - Di;
-
-	assign out4r = Ar - Bi - Cr + Di;
-	assign out4i = Ai + Br - Ci - Dr;
-
-	*/
-
-
+	parameter signed [15:0] W0r, W0i, W1r, W1i, W2r, W2i, W3r, W3i, W4r, W4i, W5r, W5i, W6r, W6i, W7r, W7i, W8r, W8i, W9r, W9i;
+	W0r = 16'b01_00000000000000; // real(W) = 1.000000000000, imag(W) = 0.000000000000
+	W0i = 16'b0;
+	W1r = 16'b00_11101100100000; // real(W) = 0.923879532511, imag(W) = -0.382683432365  
+	W1i = 16'b11_10011110000010; 
+	W2r = 16'b00_10110101000001; // real(W) = 0.707106781187, imag(W) = -0.707106781187
+	W2i = 16'b11_01001010111111;  
+	W3r = 16'b00_01100001111101; // real(W) = 0.382683432365, imag(W) = -0.923879532511
+	W3i = 16'b11_00010011011111;  
+	W4r = 16'b00_00000000000000; // real(W) = 0.000000000000, imag(W) = -1.000000000000
+	W4i = 16'b10_00000000000000;
+	W5r = 16'b11_10011110000010; // real(W) = -0.382683432365, imag(W) = -0.923879532511
+	W5i = 16'b11_00010011011111;    
+	W6r = 16'b11_01001010111111; // real(W) = -0.707106781187, imag(W) = -0.707106781187
+	W6i = 16'b11_01001010111111;  
+	W7r = 16'b11_00010011011111; // real(W) = -0.923879532511, imag(W) = -0.382683432365
+	W7i = 16'b11_10011110000010; 
+	W8r = 16'b10_00000000000000; // real(W) = -1.000000000000, imag(W) = -0.000000000000
+	W8i = 16'b00_00000000000000;  
+	W9r = 16'b11_00010011011111; // real(W) = -0.923879532511, imag(W) = 0.382683432365
+	W9i = 16'b00_01100001111101;  
 endmodule 
