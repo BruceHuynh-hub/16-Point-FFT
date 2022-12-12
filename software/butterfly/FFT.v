@@ -24,35 +24,20 @@ module FFT (
 
 	reg [15:0] 		    dmux;
 	
-	/*
-
-	reg [15:0] din0_Ar_n, din0_Br_n, din0_Cr_n, din0_Dr_n;
-	reg [15:0] din0_Ai_n, din0_Bi_n, din0_Ci_n, din0_Di_n,
-
-	reg [15:0] din1_Ar_n, din1_Br_n, din1_Cr_n, din1_Dr_n;
-	reg [15:0] din1_Ai_n, din1_Bi_n, din1_Ci_n, din1_Di_n,
-
-	reg [15:0] din2_Ar_n, din2_Br_n, din2_Cr_n, din2_Dr_n;
-	reg [15:0] din2_Ai_n, din2_Bi_n, din2_Ci_n, din2_Di_n,
-
-	reg [15:0] din3_Ar_n, din3_Br_n, din3_Cr_n, din3_Dr_n;
-	reg [15:0] din3_Ai_n, din3_Bi_n, din3_Ci_n, din3_Di_n,
-
- */
 
 	// butterfly outputs
 
-	reg signed [15:0] but0_Ar, but0_Br, but0_Cr, but0_Dr;
-	reg signed [15:0] but0_Ai, but0_Bi, but0_Ci, but0_Di;
+	wire signed [15:0] but0_Ar, but0_Br, but0_Cr, but0_Dr;
+	wire signed [15:0] but0_Ai, but0_Bi, but0_Ci, but0_Di;
 
-	reg signed [15:0] but1_Ar, but1_Br, but1_Cr, but1_Dr;
-	reg signed [15:0] but1_Ai, but1_Bi, but1_Ci, but1_Di;
+	wire signed [15:0] but1_Ar, but1_Br, but1_Cr, but1_Dr;
+	wire signed [15:0] but1_Ai, but1_Bi, but1_Ci, but1_Di;
 
-	reg signed [15:0] but2_Ar, but2_Br, but2_Cr, but2_Dr;
-	reg signed [15:0] but2_Ai, but2_Bi, but2_Ci, but2_Di;
+	wire signed [15:0] but2_Ar, but2_Br, but2_Cr, but2_Dr;
+	wire signed [15:0] but2_Ai, but2_Bi, but2_Ci, but2_Di;
 
-	reg signed [15:0] but3_Ar, but3_Br, but3_Cr, but3_Dr;
-	reg signed [15:0] but3_Ai, but3_Bi, but3_Ci, but3_Di;
+	wire signed [15:0] but3_Ar, but3_Br, but3_Cr, but3_Dr;
+	wire signed [15:0] but3_Ai, but3_Bi, but3_Ci, but3_Di;
 
 	reg signed [15:0] but0_Ar_n, but0_Br_n, but0_Cr_n, but0_Dr_n;
 	reg signed [15:0] but0_Ai_n, but0_Bi_n, but0_Ci_n, but0_Di_n;
@@ -87,42 +72,8 @@ module FFT (
 		begin
 			if (puc_rst)
 				begin
+					
 					/*
-					din0_Ar_n <= 16'b0; 
-					din0_Br_n <= 16'b0;
-					din0_Cr_n <= 16'b0;
-					din0_Dr_n <= 16'b0;
-					din0_Ai_n <= 16'b0;
-					din0_Bi_n <= 16'b0;
-					din0_Ci_n <= 16'b0;
-					din0_Di_n <= 16'b0;
-
-					din1_Br_n <= 16'b0;
-					din1_Cr_n <= 16'b0;
-					din1_Dr_n <= 16'b0;
-					din1_Ai_n <= 16'b0;
-					din1_Bi_n <= 16'b0;
-					din1_Ci_n <= 16'b0;
-					din1_Di_n <= 16'b0;
-
-					din2_Ar_n <= 16'b0;
-					din2_Br_n <= 16'b0;
-					din2_Cr_n <= 16'b0;
-					din2_Dr_n <= 16'b0;
-					din2_Ai_n <= 16'b0;
-					din2_Bi_n <= 16'b0;
-					din2_Ci_n <= 16'b0;
-					din2_Di_n <= 16'b0;
-
-					din3_Ar_n <= 16'b0;
-					din3_Br_n <= 16'b0;
-					din3_Cr_n <= 16'b0;
-					din3_Dr_n <= 16'b0;
-					din3_Ai_n <= 16'b0;
-					din3_Bi_n <= 16'b0;
-					din3_Ci_n <= 16'b0;
-					din3_Di_n <= 16'b0;
-					*/
 					but0_Ar   <= 16'b0;
 					but0_Br   <= 16'b0;
 					but0_Cr   <= 16'b0;
@@ -158,7 +109,7 @@ module FFT (
 					but3_Bi   <= 16'b0;
 					but3_Ci   <= 16'b0;
 					but3_Di   <= 16'b0;
-
+					*/
 					but0_Ar_n <= 16'b0;
 					but0_Br_n <= 16'b0;
 					but0_Cr_n <= 16'b0;
@@ -198,41 +149,6 @@ module FFT (
 
 
 				end else begin
-					din0_Ar_n <= din0_Ar;
-					din0_Br_n <= din0_Br;
-					din0_Cr_n <= din0_Cr;
-					din0_Dr_n <= din0_Dr;
-					din0_Ai_n <= din0_Ai;
-					din0_Bi_n <= din0_Bi;
-					din0_Ci_n <= din0_Ci;
-					din0_Di_n <= din0_Di;
-
-					din1_Ar_n <= din1_Ar;
-					din1_Br_n <= din1_Br;
-					din1_Cr_n <= din1_Cr;
-					din1_Dr_n <= din1_Dr;
-					din1_Ai_n <= din1_Ai;
-					din1_Bi_n <= din1_Bi;
-					din1_Ci_n <= din1_Ci;
-					din1_Di_n <= din1_Di;
-
-					din2_Ar_n <= din2_Ar;
-					din2_Br_n <= din2_Br;
-					din2_Cr_n <= din2_Cr;
-					din2_Dr_n <= din2_Dr;
-					din2_Ai_n <= din2_Ai;
-					din2_Bi_n <= din2_Bi;
-					din2_Ci_n <= din2_Ci;
-					din2_Di_n <= din2_Di;
-
-					din3_Ar_n <= din3_Ar;
-					din3_Br_n <= din3_Br;
-					din3_Cr_n <= din3_Cr;
-					din3_Dr_n <= din3_Dr;
-					din3_Ai_n <= din3_Ai;
-					din3_Bi_n <= din3_Bi;
-					din3_Ci_n <= din3_Ci;
-					din3_Di_n <= din3_Di;
 
 					but0_Ar_n <= but0_Ar;
 					but0_Br_n <= but0_Br;
@@ -313,6 +229,6 @@ module FFT (
 	// Define the transposition in terms of bit positions in registers
 
 	             
-	assign per_dout = dmux;
+	//assign per_dout = dmux;
 	
 endmodule
