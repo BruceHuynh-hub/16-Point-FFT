@@ -1,7 +1,7 @@
 module butterfly (
 	input signed  [15:0] Ar, Br, Cr, Dr,
 	input signed  [15:0] Ai, Bi, Ci, Di,
-	output signed [15:0] out0r, out1r, out2r, out3r,
+	output  signed [15:0] out0r, out1r, out2r, out3r,
 	output signed [15:0] out0i, out1i, out2i, out3i
 );
 
@@ -75,5 +75,5 @@ module butterfly (
 	assign out2i = Ai - W1P1i + W2P2i - W3P3i;
 	assign out3r = Ar - W1P1i - W2P2r + W3P3i;
 	assign out3i = Ai + W1P1r - W2P2i - W3P3r;
-
+	// https://ieeexplore.ieee.org/document/7451037
 endmodule 
