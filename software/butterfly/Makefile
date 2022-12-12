@@ -38,5 +38,5 @@ clean:
 	rm -f ${NAME} ${NAME}.a43 ${NAME}.lst ${NAME}.elf ${NAME}.size *.o *~
 
 iver:
-	iverilog -o signed_multiplier signed_multiplier.v signed_multiplier_tb.v 
+	iverilog -o my_design butterfly.v signed_multiplier.v signed_multiplier_tb.v 
 	vvp signed_multiplier
