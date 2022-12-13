@@ -36,11 +36,13 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
   
 	c_re[ 0] = b_re[ 0]; c_im[ 0] = b_im[ 0];
 	c_re[ 1] = b_re[ 1]; c_im[ 1] = b_im[ 1];
+	printf("C1:%x\n", c_re[1]);
 	c_re[ 2] = b_re[ 2]; c_im[ 2] = b_im[ 2];
 	c_re[ 3] = b_re[ 3]; c_im[ 3] = b_im[ 3];
 	
 	c_re[ 4] = b_re[ 4]; c_im[ 4] = b_im[ 4];
 	c_re[ 5] = (W1_re * b_re[ 5] - W1_im * b_im[ 5]) >> 15;
+	printf("C5:%x\n", c_re[5]);
 	c_im[ 5] = (W1_re * b_im[ 5] + W1_im * b_re[ 5]) >> 15;
 	c_re[ 6] = (W2_re * b_re[ 6] - W2_im * b_im[ 6]) >> 15;
 	c_im[ 6] = (W2_re * b_im[ 6] + W2_im * b_re[ 6]) >> 15;
@@ -49,6 +51,7 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
 	
 	c_re[ 8] = b_re[ 8]; c_im[ 8] = b_im[ 8];
 	c_re[ 9] = (W2_re * b_re[ 9] - W2_im * b_im[ 9]) >> 15;
+	printf("C9:%x\n", c_re[9]);
 	c_im[ 9] = (W2_re * b_im[ 9] + W2_im * b_re[ 9]) >> 15;
 	c_re[10] = -1 * b_im[10];
 	c_im[10] = -1 * b_re[10];
@@ -57,6 +60,7 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
 	
 	c_re[12] = b_re[12]; c_im[12] = b_im[12];
 	c_re[13] = (W3_re * b_re[13] - W3_im * b_im[13]) >> 15;
+	printf("CD:%x\n", c_re[13]);
 	c_im[13] = (W3_re * b_im[13] + W3_im * b_re[13]) >> 15;
 	c_re[14] = (W6_re * b_re[14] - W6_im * b_im[14]) >> 15;
 	c_im[14] = (W6_re * b_im[14] + W6_im * b_re[14]) >> 15;

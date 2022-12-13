@@ -23,16 +23,16 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
   	b_im[4*i+3] =          a[i+4]          - a[i+12];
   }
   
-  const signed short W1_re =  30274;
-  const signed short W1_im = -12540;
-  const signed short W2_re =  23170;
-  const signed short W2_im = -23170;
-  const signed short W3_re =  12540;
-  const signed short W3_im = -30274;
-  const signed short W6_re = -23170;
-  const signed short W6_im = -23170;
-  const signed short W9_re = -30274;
-  const signed short W9_im =  12540;
+  const signed long W1_re =  30274;
+  const signed long W1_im = -12540;
+  const signed long W2_re =  23170;
+  const signed long W2_im = -23170;
+  const signed long W3_re =  12540;
+  const signed long W3_im = -30274;
+  const signed long W6_re = -23170;
+  const signed long W6_im = -23170;
+  const signed long W9_re = -30274;
+  const signed long W9_im =  12540;
   
 	c_re[ 0] = b_re[ 0]; c_im[ 0] = b_im[ 0];
 	c_re[ 1] = b_re[ 1]; c_im[ 1] = b_im[ 1];
