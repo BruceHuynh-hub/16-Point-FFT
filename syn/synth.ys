@@ -34,8 +34,14 @@ read_verilog ../rtl/periph/omsp_gpio.v
 # read_verilog ../software/mmreg/mmreg.v
 # read_verilog -I../rtl ../software/mmreg/toplevel.v
 
-read_verilog ../software/transpose/transpose.v
-read_verilog -I../rtl ../software/transpose/toplevel.v
+# read_verilog ../software/transpose/transpose.v
+# read_verilog -I../rtl ../software/transpose/toplevel.v
+
+read_verilog ../software/butterfly/butterfly2.v
+read_verilog ../software/butterfly/twiddle.v
+read_verilog ../software/butterfly/signed_multiplier.v
+read_verilog ../software/butterfly/FFT.v
+read_verilog -I../rtl ../software/butterfly/toplevel.v
 
 synth -top toplevel
 flatten

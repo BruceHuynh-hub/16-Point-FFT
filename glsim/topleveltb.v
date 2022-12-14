@@ -43,6 +43,7 @@ module  topleveltb;
    wire [31:0] 	      inst_number;
    wire [15:0] 	      inst_pc;
    wire [8*32-1:0]    inst_short;
+   reg                uart_line;
    
    // Testbench variables
    integer            tb_idx;
@@ -152,7 +153,19 @@ module  topleveltb;
 	forever
 	  begin
 	     task_user_uart_rx;
-	     $display("UART: %c", user_uart_buf);
+	     if (uart_line)
+	     	begin
+	     		$write("%c", user_uart_buf);
+	     		if (user_uart_buf == 8'h0a)
+	     			$write("UART: ");
+	     		$fflush;
+	     	end
+	     else
+	     	begin
+	     		$write("UART: %c", user_uart_buf);
+	     		$fflush;
+	     		uart_line = 1;
+	     	end
 	  end
      end
    

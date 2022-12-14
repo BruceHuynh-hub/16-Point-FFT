@@ -1,7 +1,8 @@
 # SYSDIR = ../software/sandbox
 # SYSDIR = ../software/uart
 # SYSDIR = ../software/timer
-SYSDIR = ../software/mmreg
+# SYSDIR = ../software/mmreg
+SYSDIR = ../software/butterfly
 
 TARGET = $(SYSDIR)/app.elf
 
@@ -13,8 +14,8 @@ all:
 	@echo "clean            Cleanup"
 
 libcmd:
-	ls /mnt/volume_nyc1_01/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells | awk '{print "+libdir+/mnt/volume_nyc1_01/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells/" $$0;}' >lib.cmd
-	ls /mnt/volume_nyc1_01/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells | awk '{print "+incdir+/mnt/volume_nyc1_01/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells/" $$0;}' >>lib.cmd
+	ls /mnt/volume_sky130/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells | awk '{print "+libdir+/mnt/volume_sky130/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells/" $$0;}' >lib.cmd
+	ls /mnt/volume_sky130/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells | awk '{print "+incdir+/mnt/volume_sky130/skywater-pdk/libraries/sky130_fd_sc_hd/latest/cells/" $$0;}' >>lib.cmd
 
 
 iver:
