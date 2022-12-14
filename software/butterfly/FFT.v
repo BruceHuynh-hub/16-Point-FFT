@@ -115,10 +115,7 @@ module FFT (
 	      14'h8d : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[2] : 16'h0;
 	      14'h8e : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[3] : 16'h0;
 	      14'h8f : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[3] : 16'h0;
-	      14'h90 : begin 
-	      $display("dre[4] = %d\n", dre[4]);
-	      dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[4] : 16'h0;
-	      end
+	      14'h9a : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[4] : 16'h0;
 	      14'h91 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[4] : 16'h0;
 	      14'h92 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[5] : 16'h0;
 	      14'h93 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[5] : 16'h0;

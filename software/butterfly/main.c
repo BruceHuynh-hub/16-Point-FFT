@@ -65,7 +65,7 @@ int main(void) {
   sw_time = 0;
   for (i=0; i<4; i++) {
     TimerLap();
-    //shiftFFT(sig(i), fft_re, fft_im);
+    shiftFFT(sig(i), fft_re, fft_im);
     sw_check += 3*fft_re[0] + fft_im[1] + fft_re[2] + fft_im[4] + fft_im[7];
     sw_time += TimerLap();
     putchar('*');
@@ -93,7 +93,7 @@ int main(void) {
     puthex(fft_im[i]);
     putchar('\n');
     putchar('R'); putchar(c16[i]); putchar('=');
-    puthex(*((&FFT_OUT0R) + 2*i));
+    puthex(*(i == 4 ? &FFT_OUT4R : (&FFT_OUT0R + 2*i)));
     putchar(' ');
     putchar('I'); putchar(c16[i]); putchar('=');
     puthex(*((&FFT_OUT0I) + 2*i));

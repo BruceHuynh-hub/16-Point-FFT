@@ -9,7 +9,7 @@
 #define FFT_OUT2I   (*(volatile signed *) 0x11A)
 #define FFT_OUT3R   (*(volatile signed *) 0x11C)
 #define FFT_OUT3I   (*(volatile signed *) 0x11E)
-#define FFT_OUT4R   (*(volatile signed *) 0x120)
+#define FFT_OUT4R   (*(volatile signed *) 0x134)
 #define FFT_OUT4I   (*(volatile signed *) 0x122)
 #define FFT_OUT5R   (*(volatile signed *) 0x124)
 #define FFT_OUT5I   (*(volatile signed *) 0x126)
