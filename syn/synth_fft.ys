@@ -1,9 +1,9 @@
 read_liberty -lib /mnt/volume_sky130/skywater-pdk/libraries/sky130_fd_sc_hd/latest/timing/sky130_fd_sc_hd__tt_025C_1v80.lib
 
-read_verilog ../software/butterfly/butterfly.v
-read_verilog ../software/butterfly/twiddle.v
-read_verilog ../software/butterfly/signed_multiplier.v
-read_verilog ../software/butterfly/FFT.v 
+read_verilog ../butterfly/butterfly.v
+read_verilog ../butterfly/twiddle.v
+read_verilog ../butterfly/signed_multiplier.v
+read_verilog ../butterfly/FFT.v 
 
 synth -top FFT
 flatten

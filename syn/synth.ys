@@ -27,21 +27,11 @@ read_verilog ../rtl/openMSP430_undefines.v
 read_verilog ../rtl/periph/omsp_timerA.v
 read_verilog ../rtl/periph/omsp_gpio.v
 
-# read_verilog -I../rtl ../software/sandbox/toplevel.v
-# read_verilog -I../rtl ../software/uart/toplevel.v
-# read_verilog -I../rtl ../software/timer/toplevel.v
-
-# read_verilog ../software/mmreg/mmreg.v
-# read_verilog -I../rtl ../software/mmreg/toplevel.v
-
-# read_verilog ../software/transpose/transpose.v
-# read_verilog -I../rtl ../software/transpose/toplevel.v
-
-read_verilog ../software/butterfly/butterfly.v
-read_verilog ../software/butterfly/twiddle.v
-read_verilog ../software/butterfly/signed_multiplier.v
-read_verilog ../software/butterfly/FFT.v
-read_verilog -I../rtl ../software/butterfly/toplevel.v
+read_verilog ../butterfly/butterfly.v
+read_verilog ../butterfly/twiddle.v
+read_verilog ../butterfly/signed_multiplier.v
+read_verilog ../butterfly/FFT.v
+read_verilog -I../rtl ../butterfly/toplevel.v
 
 synth -top toplevel
 flatten
