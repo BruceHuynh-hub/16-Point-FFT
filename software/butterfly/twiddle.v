@@ -91,6 +91,8 @@ module twiddle (
 	// dout[15:12]
 	wire [15:0] din_13rW3r, din_13rW3i, din_13iW3r, din_13iW3i;
 	wire [15:0] din_14rW6r, din_14iW6r;
+	wire [15:0] din_15rW9r, din_15rW9i, din_15iW9r, din_15iW9i;
+
 	assign dout_r12 = din_r12;
 	assign dout_i12 = din_i12;
 
@@ -106,7 +108,12 @@ module twiddle (
 	assign dout_r14 = din_14rW6r;
 	assign dout_i14 = din_14iW6r;	
 
-	
+	signed_multiplier sm_15rW9r(.din(din_r15), .W(W9r), .dout(din_15rW9r));
+	signed_multiplier sm_15rW9i(.din(din_r15), .W(W9i), .dout(din_15rW9i));
+	signed_multiplier sm_15iW9r(.din(din_i15), .W(W9r), .dout(din_15iW9r));
+	signed_multiplier sm_15iW9i(.din(din_i15), .W(W9i), .dout(din_15iW9i));
+	assign dout_r15 = din_15rW9r - din_15iW9i;
+	assign dout_i15 = din_15rW9i + din_15iW9r;
 
 
 
