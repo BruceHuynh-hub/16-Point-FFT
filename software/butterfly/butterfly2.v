@@ -1,4 +1,4 @@
-module butterfly2 (
+module butterfly (
 	input signed  [15:0] Ar, Br, Cr, Dr,
 	input signed  [15:0] Ai, Bi, Ci, Di,
 
@@ -8,9 +8,6 @@ module butterfly2 (
 
 );
  
-
-
-
 	assign out0r = Ar + Br + Cr + Dr;
 	assign out0i = Ai + Bi + Ci + Di;
 
@@ -22,8 +19,5 @@ module butterfly2 (
 
 	assign out3r = Ar - Bi - Cr + Di;
 	assign out3i = Ai + Br - Ci - Dr;
-
-
-
 
 endmodule 
