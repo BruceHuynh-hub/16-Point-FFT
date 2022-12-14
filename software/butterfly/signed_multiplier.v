@@ -26,7 +26,7 @@ module signed_multiplier(
 		end
 		else begin
 			dinW = din_stored * W_stored;
-			dinW_o = dinW[29:14];
+			dinW_o = dinW[30:15];
 
 		end
 	end
