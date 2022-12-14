@@ -42,7 +42,17 @@ unsigned prng() {
 }
 
 signed sig(unsigned i) {
-	return (16-i)*(i+1)*10;
+	// DC Offset
+	//return 800;
+	
+	// Cosine Wave
+	//return (i%4 == 3) ? 1000 : (i%4 == 1) ? -1000 : 0;
+	
+	// Quadratic
+	return 10*(16-i)*(16-i);
+	
+	// Other
+	// return (16-i)*(i+1)*10;
 }
   
 int main(void) {
@@ -63,7 +73,7 @@ int main(void) {
   prngseed();
   sw_check = 0;
   sw_time = 0;
-  for (i=0; i<4; i++) {
+  for (i=0; i<16; i++) {
     TimerLap();
     shiftFFT(sig(i), fft_re, fft_im);
     sw_check += 3*fft_re[0] + fft_im[1] + fft_re[2] + fft_im[4] + fft_im[7];
@@ -76,7 +86,7 @@ int main(void) {
   prngseed();
   hw_check = 0;
   hw_time  = 0;
-  for (i=0; i<4; i++) {
+  for (i=0; i<16; i++) {
     TimerLap();
     FFT_FIFO = sig(i);
     hw_check += 3*FFT_OUT0R + FFT_OUT1I + FFT_OUT2R + FFT_OUT4I + FFT_OUT7I;
@@ -126,7 +136,7 @@ int main(void) {
   puthex(hw_time       );
 	putchar('\n');
 	
-	if (abs(sw_check - hw_check) < 5) {
+	if (abs(sw_check - hw_check) < 64) {
 		putchar('P');
 		putchar('A');
 		putchar('S');

@@ -1,0 +1,19 @@
+
+--- Test shiftFFT ---
+
+ 0: re =  12800, im =      0
+ 1: re =      0, im =      0
+ 2: re =      0, im =      0
+ 3: re =      0, im =      0
+ 4: re =      0, im =      0
+ 5: re =      0, im =      0
+ 6: re =      0, im =      0
+ 7: re =      0, im =      0
+ 8: re =      0, im =      0
+ 9: re =      0, im =      0
+10: re =      0, im =      0
+11: re =      0, im =      0
+12: re =      0, im =      0
+13: re =      0, im =      0
+14: re =      0, im =      0
+15: re =      0, im =      0
