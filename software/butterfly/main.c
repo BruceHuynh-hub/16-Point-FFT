@@ -2,6 +2,7 @@
 #include "omsp_uart.h"
 #include "butterfly_fft.h"
 #include "shiftFFT.h"
+#include <stdlib.h>
 
 char c16[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 
@@ -40,18 +41,8 @@ unsigned prng() {
     return (result | 0x7FFF);
 }
 
-unsigned long long hwtranspose(unsigned long long a) {
-	unsigned long long b = 0;
-	/*FFT_REG1 = (a >> 48) & 0xffff;
-	FFT_REG2 = (a >> 32) & 0xffff;
-	FFT_REG3 = (a >> 16) & 0xffff;
-	FFT_REG4 = a & 0xffff;
-	
-	b = FFT_REG4;
-	b |= ((unsigned long long) FFT_REG3 << 16);
-	b |= ((unsigned long long) FFT_REG2 << 32);
-	b |= ((unsigned long long) FFT_REG1 << 48);*/
-  return b;
+signed sig(unsigned i) {
+	return (16-i)*(i+1)*10;
 }
   
 int main(void) {
@@ -72,50 +63,44 @@ int main(void) {
   prngseed();
   sw_check = 0;
   sw_time = 0;
-  for (i=0; i<16; i++) {
+  for (i=0; i<4; i++) {
     TimerLap();
-    //shiftFFT((16-i)*(16-i)*10, fft_re, fft_im);
-    sw_check += fft_re[0];
+    //shiftFFT(sig(i), fft_re, fft_im);
+    sw_check += 3*fft_re[0] + fft_im[1] + fft_re[2] + fft_im[4] + fft_im[7];
     sw_time += TimerLap();
     putchar('*');
   }
   
   putchar('\n');
-  for (i=0; i<2; i++) {
-    putchar('r'); putchar(c16[i]); putchar('=');
+	putchar('>');
+  prngseed();
+  hw_check = 0;
+  hw_time  = 0;
+  for (i=0; i<4; i++) {
+    TimerLap();
+    FFT_FIFO = sig(i);
+    hw_check += 3*FFT_OUT0R + FFT_OUT1I + FFT_OUT2R + FFT_OUT4I + FFT_OUT7I;
+    hw_time += TimerLap();
+    putchar('#');
+  }
+  
+  putchar('\n');
+  for (i=0; i<9; i++) {
+  	putchar('r'); putchar(c16[i]); putchar('=');
     puthex(fft_re[i]);
     putchar(' ');
     putchar('i'); putchar(c16[i]); putchar('=');
     puthex(fft_im[i]);
     putchar('\n');
-  }
-  
-	putchar('>');
-  prngseed();
-  hw_check = 0;
-  hw_time  = 0;
-  for (i=0; i<16; i++) {
-    TimerLap();
-    FFT_FIFO = (16-i)*(16-i)*10;
-    hw_check += FFT_OUT1;
-    hw_time += TimerLap();
-    putchar('#');
+    putchar('R'); putchar(c16[i]); putchar('=');
+    puthex(*((&FFT_OUT0R) + 2*i));
+    putchar(' ');
+    putchar('I'); putchar(c16[i]); putchar('=');
+    puthex(*((&FFT_OUT0I) + 2*i));
+    putchar('\n');
   }
 	
 	putchar('\n');
-	putchar('r'); putchar(c16[0]); putchar('=');
-  puthex(FFT_OUT0);
-  putchar(' ');
-  putchar('i'); putchar(c16[0]); putchar('=');
-  puthex(FFT_OUT1);
-  putchar('\n');
-  putchar('r'); putchar(c16[1]); putchar('=');
-  puthex(FFT_OUT2);
-  putchar(' ');
-  putchar('i'); putchar(c16[1]); putchar('=');
-  puthex(FFT_OUT3);
-	
-	putchar('\n'); putchar('\n');
   putchar('S');
   puthex(sw_check >> 48);
   puthex(sw_check >> 32);
@@ -141,7 +126,7 @@ int main(void) {
   puthex(hw_time       );
 	putchar('\n');
 	
-	if (sw_check == hw_check) {
+	if (abs(sw_check - hw_check) < 5) {
 		putchar('P');
 		putchar('A');
 		putchar('S');

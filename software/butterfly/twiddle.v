@@ -80,8 +80,8 @@ module twiddle (
 	assign dout_r9 = din_9rW2r;
 	assign dout_i9 = din_9iW2r;
 
-	assign dout_r10 = ~din_r10 + 1'b1;
-	assign dout_i10 = ~din_i10 + 1'b1;
+	assign dout_r10 = ~din_i10 + 1'b1;
+	assign dout_i10 = ~din_r10 + 1'b1;
 
 	signed_multiplier sm_11r_SUB_iW6r(.din(din_r11 - din_i11), .W(W6r), .dout(din_11rW6r));
 	signed_multiplier sm_11i_ADD_rW6r(.din(din_i11 + din_r11), .W(W6r), .dout(din_11iW6r));

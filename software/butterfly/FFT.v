@@ -94,7 +94,7 @@ module FFT (
 	  begin
 	    // write
 	    case (per_addr)
-	      14'h98 : begin
+	      14'ha0 : begin
 	      	if (per_we[0] & per_we[1])
 	      		begin
 	      			a0n = per_din;
@@ -111,6 +111,23 @@ module FFT (
 	      14'h89 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[0] : 16'h0;
 	      14'h8a : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[1] : 16'h0;
 	      14'h8b : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[1] : 16'h0;
+	      14'h8c : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[2] : 16'h0;
+	      14'h8d : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[2] : 16'h0;
+	      14'h8e : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[3] : 16'h0;
+	      14'h8f : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[3] : 16'h0;
+	      14'h90 : begin 
+	      $display("dre[4] = %d\n", dre[4]);
+	      dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[4] : 16'h0;
+	      end
+	      14'h91 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[4] : 16'h0;
+	      14'h92 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[5] : 16'h0;
+	      14'h93 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[5] : 16'h0;
+	      14'h94 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[6] : 16'h0;
+	      14'h95 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[6] : 16'h0;
+	      14'h96 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[7] : 16'h0;
+	      14'h97 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[7] : 16'h0;
+	      14'h98 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dre[8] : 16'h0;
+	      14'h99 : dmux = ( ~per_we[0] & ~per_we[1] ) ? dim[8] : 16'h0;
 	    endcase
 	  end
      end
