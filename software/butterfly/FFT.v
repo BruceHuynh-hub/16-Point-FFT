@@ -54,16 +54,16 @@ module FFT (
 
 	// butterfly units
 
-	butterfly but0 (.Ar(din0_Ar), .Ai(din0_Ai), .Br(din0_Br), .Bi(din0_Bi), .Cr(din0_Cr), .Ci(din0_Ci), .Dr(din0_Dr), .Di(din0_Di),
+	butterfly2 but0 (.Ar(din0_Ar), .Ai(din0_Ai), .Br(din0_Br), .Bi(din0_Bi), .Cr(din0_Cr), .Ci(din0_Ci), .Dr(din0_Dr), .Di(din0_Di),
 	.out0r(but0_Ar), .out0i(but0_Ai), .out1r(but0_Br), .out1i(but0_Bi), .out2r(but0_Cr), .out2i(but0_Ci), .out3r(but0_Dr), .out3i(but0_Di));
 
-	butterfly but1 (.Ar(din1_Ar), .Ai(din1_Ai), .Br(din1_Br), .Bi(din1_Bi), .Cr(din1_Cr), .Ci(din1_Ci), .Dr(din1_Dr), .Di(din1_Di),
+	butterfly2 but1 (.Ar(din1_Ar), .Ai(din1_Ai), .Br(din1_Br), .Bi(din1_Bi), .Cr(din1_Cr), .Ci(din1_Ci), .Dr(din1_Dr), .Di(din1_Di),
 	.out0r(but1_Ar), .out0i(but1_Ai), .out1r(but1_Br), .out1i(but1_Bi), .out2r(but1_Cr), .out2i(but1_Ci), .out3r(but1_Dr), .out3i(but1_Di));
 
-    butterfly but2 (.Ar(din2_Ar), .Ai(din2_Ai), .Br(din2_Br), .Bi(din2_Bi), .Cr(din2_Cr), .Ci(din2_Ci), .Dr(din2_Dr), .Di(din2_Di),
+    butterfly2 but2 (.Ar(din2_Ar), .Ai(din2_Ai), .Br(din2_Br), .Bi(din2_Bi), .Cr(din2_Cr), .Ci(din2_Ci), .Dr(din2_Dr), .Di(din2_Di),
 	.out0r(but2_Ar), .out0i(but2_Ai), .out1r(but2_Br), .out1i(but2_Bi), .out2r(but2_Cr), .out2i(but2_Ci), .out3r(but2_Dr), .out3i(but2_Di));
 
-	butterfly but3 (.Ar(din3_Ar), .Ai(din3_Ai), .Br(din3_Br), .Bi(din3_Bi), .Cr(din3_Cr), .Ci(din3_Ci), .Dr(din3_Dr), .Di(din3_Di),
+	butterfly2 but3 (.Ar(din3_Ar), .Ai(din3_Ai), .Br(din3_Br), .Bi(din3_Bi), .Cr(din3_Cr), .Ci(din3_Ci), .Dr(din3_Dr), .Di(din3_Di),
 	.out0r(but3_Ar), .out0i(but3_Ai), .out1r(but3_Br), .out1i(but3_Bi), .out2r(but3_Cr), .out2i(but3_Ci), .out3r(but3_Dr), .out3i(but3_Di));
 
 
