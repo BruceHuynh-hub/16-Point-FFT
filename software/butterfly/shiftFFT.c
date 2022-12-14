@@ -26,11 +26,11 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
   const signed long W1_re =  30274;
   const signed long W1_im = -12540;
   const signed long W2_re =  23170;
-  const signed long W2_im = -23170;
+  //const signed long W2_im = -23170;
   const signed long W3_re =  12540;
   const signed long W3_im = -30274;
   const signed long W6_re = -23170;
-  const signed long W6_im = -23170;
+  //const signed long W6_im = -23170;
   const signed long W9_re = -30274;
   const signed long W9_im =  12540;
   
@@ -42,24 +42,24 @@ void shiftFFT(signed short in, signed short out_re[], signed short out_im[]) {
 	c_re[ 4] = b_re[ 4]; c_im[ 4] = b_im[ 4];
 	c_re[ 5] = (W1_re * b_re[ 5] - W1_im * b_im[ 5]) >> 15;
 	c_im[ 5] = (W1_re * b_im[ 5] + W1_im * b_re[ 5]) >> 15;
-	c_re[ 6] = (W2_re * b_re[ 6] - W2_im * b_im[ 6]) >> 15;
-	c_im[ 6] = (W2_re * b_im[ 6] + W2_im * b_re[ 6]) >> 15;
+	c_re[ 6] = (W2_re * (b_re[ 6] + b_im[ 6])) >> 15;
+	c_im[ 6] = (W2_re * (b_im[ 6] - b_re[ 6])) >> 15;
 	c_re[ 7] = (W3_re * b_re[ 7] - W3_im * b_im[ 7]) >> 15;
 	c_im[ 7] = (W3_re * b_im[ 7] + W3_im * b_re[ 7]) >> 15;
 	
 	c_re[ 8] = b_re[ 8]; c_im[ 8] = b_im[ 8];
-	c_re[ 9] = (W2_re * b_re[ 9] - W2_im * b_im[ 9]) >> 15;
-	c_im[ 9] = (W2_re * b_im[ 9] + W2_im * b_re[ 9]) >> 15;
+	c_re[ 9] = (W2_re * (b_re[ 9] + b_im[ 9])) >> 15;
+	c_im[ 9] = (W2_re * (b_im[ 9] - b_re[ 9])) >> 15;
 	c_re[10] = -1 * b_im[10];
 	c_im[10] = -1 * b_re[10];
-	c_re[11] = (W6_re * b_re[11] - W6_im * b_im[11]) >> 15;
-	c_im[11] = (W6_re * b_im[11] + W6_im * b_re[11]) >> 15;
+	c_re[11] = (W6_re * (b_re[11] - b_im[11])) >> 15;
+	c_im[11] = (W6_re * (b_im[11] + b_re[11])) >> 15;
 	
 	c_re[12] = b_re[12]; c_im[12] = b_im[12];
 	c_re[13] = (W3_re * b_re[13] - W3_im * b_im[13]) >> 15;
 	c_im[13] = (W3_re * b_im[13] + W3_im * b_re[13]) >> 15;
-	c_re[14] = (W6_re * b_re[14] - W6_im * b_im[14]) >> 15;
-	c_im[14] = (W6_re * b_im[14] + W6_im * b_re[14]) >> 15;
+	c_re[14] = (W6_re * (b_re[14] - b_im[14])) >> 15;
+	c_im[14] = (W6_re * (b_im[14] + b_re[14])) >> 15;
 	c_re[15] = (W9_re * b_re[15] - W9_im * b_im[15]) >> 15;
 	c_im[15] = (W9_re * b_im[15] + W9_im * b_re[15]) >> 15;
 	
