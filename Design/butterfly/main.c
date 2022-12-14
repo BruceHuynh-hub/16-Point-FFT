@@ -136,7 +136,15 @@ int main(void) {
   puthex(hw_time       );
 	putchar('\n');
 	
-	if (abs(sw_check - hw_check) < 64) {
+	unsigned long long err = abs(sw_check - hw_check);
+	putchar('E');
+  puthex(err  >> 48);
+  puthex(err  >> 32);
+  puthex(err  >> 16);
+  puthex(err       );
+	putchar('\n');
+	
+	if (err < 64) {
 		putchar('P');
 		putchar('A');
 		putchar('S');
