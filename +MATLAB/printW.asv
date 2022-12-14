@@ -1,5 +1,0 @@
-for N = 1:10
-    re = dec2bin(real(W(N)));
-    im = dec2bin(imag(W(N)));
-    fprintf("real(W) = %s, imag(W) = %\n", re, im);
-end
