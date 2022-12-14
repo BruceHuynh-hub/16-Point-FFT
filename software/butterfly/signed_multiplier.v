@@ -12,7 +12,6 @@ module signed_multiplier(
 	reg [31:0] dinW;
 	reg [31:0] dinW_2;
 	reg [15:0] dinW_o;
-	reg [1:0] flag;
 
 	always @(din or W) begin
 	din_stored = (din[15]) ? ~din + 1'b1 : din; // if negative then flip
@@ -20,14 +19,12 @@ module signed_multiplier(
 
 		flag = (din[15] + W[15]);
 		if ((din[15] + W[15]) == 1'b1) begin
-			//$display("negative detected");
 			dinW = din_stored * W_stored;
 			dinW_2 = ~dinW + 1'b1;
-			dinW_o = dinW_2[29:14];
+			dinW_o = dinW_2[30:15];
 
 		end
 		else begin
-			//$display("negative not detected");
 			dinW = din_stored * W_stored;
 			dinW_o = dinW[29:14];
 
