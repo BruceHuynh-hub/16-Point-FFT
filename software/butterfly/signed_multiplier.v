@@ -20,14 +20,14 @@ module signed_multiplier(
 
 		flag = (din[15] + W[15]);
 		if ((din[15] + W[15]) == 1'b1) begin
-			$display("negative detected");
+			//$display("negative detected");
 			dinW = din_stored * W_stored;
 			dinW_2 = ~dinW + 1'b1;
 			dinW_o = dinW_2[29:14];
 
 		end
 		else begin
-			$display("negative not detected");
+			//$display("negative not detected");
 			dinW = din_stored * W_stored;
 			dinW_o = dinW[29:14];
 

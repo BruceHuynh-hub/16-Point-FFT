@@ -72,16 +72,16 @@ int main(void) {
   prngseed();
   sw_check = 0;
   sw_time = 0;
-  for (i=0; i<1; i++) {
+  for (i=0; i<16; i++) {
     TimerLap();
-    shiftFFT((16-i)*(16-i)*10, fft_re, fft_im);
+    //shiftFFT((16-i)*(16-i)*10, fft_re, fft_im);
     sw_check += fft_re[0];
     sw_time += TimerLap();
     putchar('*');
   }
   
   putchar('\n');
-  for (i=0; i<1; i++) {
+  for (i=0; i<2; i++) {
     putchar('r'); putchar(c16[i]); putchar('=');
     puthex(fft_re[i]);
     putchar(' ');
@@ -102,6 +102,18 @@ int main(void) {
     putchar('#');
   }
 	
+	putchar('\n');
+	putchar('r'); putchar(c16[0]); putchar('=');
+  puthex(FFT_OUT0);
+  putchar(' ');
+  putchar('i'); putchar(c16[0]); putchar('=');
+  puthex(FFT_OUT1);
+  putchar('\n');
+  putchar('r'); putchar(c16[1]); putchar('=');
+  puthex(FFT_OUT2);
+  putchar(' ');
+  putchar('i'); putchar(c16[1]); putchar('=');
+  puthex(FFT_OUT3);
 	
 	putchar('\n'); putchar('\n');
   putchar('S');
