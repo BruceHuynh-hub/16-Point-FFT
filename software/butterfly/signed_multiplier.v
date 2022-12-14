@@ -15,7 +15,7 @@ module signed_multiplier(
 
 	always @(din or W) begin
 	din_stored = (din[15]) ? ~din + 1'b1 : din; // if negative then flip
-	W_stored   = (W[15])    ? ~W + 1'b1 : W; // if negative then flip
+	W_stored   = (W[15])   ? ~W   + 1'b1 : W;   // if negative then flip
 
 		flag = (din[15] + W[15]);
 		if ((din[15] + W[15]) == 1'b1) begin
