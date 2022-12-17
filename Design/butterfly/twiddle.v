@@ -7,29 +7,6 @@ module twiddle (
 
 );
 
-
-	parameter W0r = 16'b10_0_0_00_00_0000_0000; // real(W) = 1.000000000000, imag(W) = 0.000000000000
-	parameter W0i = 16'b0;
-	parameter W1r = 16'b01_0_0_00_00_0000_0000; // real(W) = 0.923879532511, imag(W) = -0.382683432365  
-	parameter W1i = 16'b11_0_0_00_00_0000_0000; 
-	parameter W2r = 16'b01_0_0_00_00_0000_0000; // real(W) = 0.707106781187, imag(W) = -0.707106781187
-	parameter W2i = 16'b10_0_0_00_00_0000_0000;  
-	parameter W3r = 16'b00_0_0_00_00_0000_0000; // real(W) = 0.382683432365, imag(W) = -0.923879532511
-	parameter W3i = 16'b10_0_0_00_00_0000_0000;  
-	parameter W4r = 16'b00_0_0_00_00_0000_0000; // real(W) = 0.000000000000, imag(W) = -1.000000000000
-	parameter W4i = 16'b10_0_0_00_00_0000_0000;
-	parameter W5r = 16'b11_0_0_00_00_0000_0000; // real(W) = -0.382683432365, imag(W) = -0.923879532511
-	parameter W5i = 16'b10_0_0_00_00_0000_0000;    
-	parameter W6r = 16'b10_0_0_00_00_0000_0000; // real(W) = -0.707106781187, imag(W) = -0.707106781187
-	parameter W6i = 16'b10_0_0_00_00_0000_0000;  
-	parameter W7r = 16'b10_0_0_00_00_0000_0000; // real(W) = -0.923879532511, imag(W) = -0.382683432365
-	parameter W7i = 16'b11_0_0_00_00_0000_0000; 
-	parameter W8r = 16'b10_0_0_00_00_0000_0000; // real(W) = -1.000000000000, imag(W) = -0.000000000000
-	parameter W8i = 16'b00_0_0_00_00_0000_0000;  
-	parameter W9r = 16'b10_0_0_00_00_0000_0000; // real(W) = -0.923879532511, imag(W) = 0.382683432365
-	parameter W9i = 16'b00_0_0_00_00_0000_0000;
-
-/*
 	parameter W0r = 16'b1000000000000000; // real(W) = 1.000000000000, imag(W) = 0.000000000000
 	parameter W0i = 16'b0;
 	parameter W1r = 16'b0111011001000001; // real(W) = 0.923879532511, imag(W) = -0.382683432365  
@@ -50,7 +27,6 @@ module twiddle (
 	parameter W8i = 16'b0000000000000000;  
 	parameter W9r = 16'b1000100110111110; // real(W) = -0.923879532511, imag(W) = 0.382683432365
 	parameter W9i = 16'b0011000011111011;
-*/
 
 	// dout[3:0]
 	assign dout_r0 = din_r0;
@@ -134,7 +110,5 @@ module twiddle (
 	signed_multiplier sm_15iW9i(.din(din_i15), .W(W9i), .dout(din_15iW9i));
 	assign dout_r15 = din_15rW9r - din_15iW9i;
 	assign dout_i15 = din_15rW9i + din_15iW9r;
-
-
 
 endmodule

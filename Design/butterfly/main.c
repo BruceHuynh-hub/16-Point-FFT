@@ -74,7 +74,6 @@ int main(void) {
   }
   putchar('\n');
   
-  /*
   for (i = 0; i <= 8; i++) {
   	putchar('r'); putchar(c16[i]); putchar('=');
     puthex(fft_re[i]);
@@ -89,7 +88,6 @@ int main(void) {
     puthex(*((&FFT_OUT0I) + 2*i));
     putchar('\n');
   }
-	*/
 	
 	putchar('\n');
   putchar('S');
