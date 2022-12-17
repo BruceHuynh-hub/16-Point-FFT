@@ -39,11 +39,12 @@ signed sig(unsigned i) {
 }
   
 int main(void) {
-  unsigned i;
-  unsigned long long sw_time;
+  unsigned i, j;
+  unsigned long long sw_time = 0;
   unsigned long long hw_time = 0;
-  unsigned long long sw_check;
+  unsigned long long sw_check = 0;
   unsigned long long hw_check = 0;
+  unsigned long long err = 0;
   signed short fft_re[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
   signed short fft_im[16] = {0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0};
   
@@ -53,30 +54,28 @@ int main(void) {
   uartinit();
 
   putchar('>');
-  sw_check = 0;
-  sw_time = 0;
   for (i=0; i<16; i++) {
-    TimerLap();
+  	TimerLap();
     shiftFFT(sig(i), fft_re, fft_im);
-    sw_check += 3*fft_re[0] + fft_im[1] + fft_re[2] + fft_im[4] + fft_im[7];
+    sw_check += 3*fft_re[0] + fft_im[2] + fft_re[5] + fft_im[7];
     sw_time += TimerLap();
     putchar('*');
-  }
-  
-  putchar('\n');
-	putchar('>');
-  hw_check = 0;
-  hw_time  = 0;
-  for (i=0; i<16; i++) {
+    
     TimerLap();
     FFT_FIFO = sig(i);
-    hw_check += 3*FFT_OUT0R + FFT_OUT1I + FFT_OUT2R + FFT_OUT4I + FFT_OUT7I;
+    hw_check += 3*FFT_OUT0R + FFT_OUT2I + FFT_OUT5R + FFT_OUT7I;
     hw_time += TimerLap();
     putchar('#');
+    
+    for (j = 0; j <= 8; j++) {
+    	err += abs(*(j == 4 ? &FFT_OUT4R : (&FFT_OUT0R + 2*j)) - fft_re[j]);
+    	err += abs(*(j == 4 ? &FFT_OUT4I : (&FFT_OUT0I + 2*j)) - fft_im[j]);
+    }
   }
-  
   putchar('\n');
-  for (i=0; i<9; i++) {
+  
+  /*
+  for (i = 0; i <= 8; i++) {
   	putchar('r'); putchar(c16[i]); putchar('=');
     puthex(fft_re[i]);
     putchar(' ');
@@ -90,6 +89,7 @@ int main(void) {
     puthex(*((&FFT_OUT0I) + 2*i));
     putchar('\n');
   }
+	*/
 	
 	putchar('\n');
   putchar('S');
@@ -116,8 +116,6 @@ int main(void) {
   puthex(hw_time  >> 16);
   puthex(hw_time       );
 	putchar('\n');
-	
-	unsigned long long err = abs(sw_check - hw_check);
 	putchar('E');
   puthex(err  >> 48);
   puthex(err  >> 32);
@@ -125,13 +123,13 @@ int main(void) {
   puthex(err       );
 	putchar('\n');
 	
-	if (err < 64) {
+	if (err < 0x100) {
 		putchar('P'); putchar('A'); putchar('S'); putchar('S');
 	} else {
 		putchar('F'); putchar('A'); putchar('I'); putchar('L');
 	}
 	putchar('\n');
-  putchar('+'); putchar('+'); sputchar('+');
+  putchar('+'); putchar('+'); putchar('+');
 
   P1OUT  = 0xF0;                    //  Simulation Stopping Command
   return 0;

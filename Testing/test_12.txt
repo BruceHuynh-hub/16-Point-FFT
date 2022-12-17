@@ -1,0 +1,11 @@
+VCD info: dumpfile topleveltb.vcd opened for output.
+UART: >*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+UART: 
+UART: SFFFFFFFFFFFE4720
+UART: T000000000000F647
+UART: HFFFFFFFFFFFE4723
+UART: T0000000000000846
+UART: E00000000000000B4
+UART: PASS
+UART: +
+end of simulation (     68846 instructions)
