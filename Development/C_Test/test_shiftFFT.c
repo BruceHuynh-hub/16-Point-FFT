@@ -88,10 +88,10 @@ signed short sig(unsigned i) {
 	//return (i%4 == 3) ? 1000 : (i%4 == 1) ? -1000 : 0;
 	
 	// Quadratic
-	//return 10*(16-i)*(16-i);
+	return 10*(16-i)*(16-i);
 	
 	// Other
-	return (16-i)*(i+1)*10;
+	//return (16-i)*(i+1)*10;
 }
 
 int main() {

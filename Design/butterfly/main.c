@@ -24,23 +24,6 @@ unsigned TimerLap() {
   return lap;
 }
 
-
-unsigned long long s0;
-unsigned long long s1;
-
-void prngseed() {
-  s0 = 0x0001020304050607LL;
-  s1 = 0x8090A0B0C0D0E0F0LL;
-}
-
-unsigned prng() {
-    unsigned long long result = s0 + s1;
-    s1 ^= s0;
-    s0 = ((s0 << 55) | (s0 >> 9)) ^ s1 ^ (s1 << 14);
-    s1 = (s1 << 36) | (s1 >> 28);
-    return (result | 0x7FFF);
-}
-
 signed sig(unsigned i) {
 	// DC Offset
 	//return 800;
@@ -70,7 +53,6 @@ int main(void) {
   uartinit();
 
   putchar('>');
-  prngseed();
   sw_check = 0;
   sw_time = 0;
   for (i=0; i<16; i++) {
@@ -83,7 +65,6 @@ int main(void) {
   
   putchar('\n');
 	putchar('>');
-  prngseed();
   hw_check = 0;
   hw_time  = 0;
   for (i=0; i<16; i++) {
@@ -145,20 +126,12 @@ int main(void) {
 	putchar('\n');
 	
 	if (err < 64) {
-		putchar('P');
-		putchar('A');
-		putchar('S');
-		putchar('S');
+		putchar('P'); putchar('A'); putchar('S'); putchar('S');
 	} else {
-		putchar('F');
-		putchar('A');
-		putchar('I');
-		putchar('L');
+		putchar('F'); putchar('A'); putchar('I'); putchar('L');
 	}
 	putchar('\n');
-  putchar('+');
-  putchar('+');
-  putchar('+');
+  putchar('+'); putchar('+'); sputchar('+');
 
   P1OUT  = 0xF0;                    //  Simulation Stopping Command
   return 0;

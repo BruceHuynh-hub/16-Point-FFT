@@ -1,6 +1,6 @@
 function [xr0, xi0, xr1, xi1, xr2, xi2, xr3, xi3] = ...
     butterfly_ri(pr0, pi0, pr1, pi1, pr2, pi2, pr3, pi3)
-    %W = exp(-1j*2*pi*(0:3)/4);
+    
     %x0 = p0 + p1 + p2 + p3;
     xr0 = pr0 + pr1 + pr2 + pr3;
     xi0 = pi0 + pi1 + pi2 + pi3;
